@@ -1,55 +1,263 @@
 import requests
 import bs4
+import os
 from datetime import datetime
+
+
+
+
+if os.scandir('Data'):
+    print('')
+else:
+    os.mkdir('Data')
 
 answer = 'y'
 
-def UsCases():
+countries = {'AF': 'afghanistan',
+    'AL': 'albania',
+    'DZ': 'algeria',
+    'AD': 'andorra',
+    'AO': 'angola',
+    'AI': 'anguilla',
+    'AG': 'antigua-and-barbuda',
+    'AR': 'argentina',
+    'AM': 'armenia',
+    'AW': 'aruba',
+    'AU': 'australia',
+    'AT': 'austria',
+    'AZ': 'azerbaijan',
+    'BS': 'bahamas',
+    'BH': 'bahrain',
+    'BD': 'bangladesh',
+    'BB': 'barbados',
+    'BY': 'belarus',
+    'BE': 'belgium',
+    'BZ': 'belize',
+    'BJ': 'benin',
+    'BM': 'bermuda',
+    'BT': 'bhutan',
+    'BO': 'bolivia',
+    'BA': 'bosnia-and-herzegovina',
+    'BW': 'botswana',
+    'BR': 'brazil',
+    'VG': 'british-virgin-islands',
+    'BN': 'brunei-darussalam',
+    'BG': 'bulgaria',
+    'BF': 'burkina-faso',
+    'BI': 'burundi',
+    'CV': 'cabo-verde',
+    'KH': 'cambodia',
+    'CM': 'cameroon',
+    'CA': 'canada',
+    'CF': 'central-african-republic',
+    'BQ': 'caribbean-netherlands',
+    'KY': 'cayman-islands',
+    'TD': 'chad',
+    'GB': 'channel-islands',
+    'CL': 'chile',
+    'CN': 'china',
+    'CO': 'colombia',
+    'KM': 'comoros',
+    'CG': 'congo',
+    'CS': 'costa-rica',
+    'HR': 'croatia',
+    'CU': 'cuba',
+    'CW': 'curacao',
+    'CY': 'cyprus',
+    'CZ': 'czech-republic',
+    'DK': 'denmark',
+    'DJ': 'djibouti',
+    'DM': 'dominica',
+    'DO': 'dominican-republic',
+    'CD': 'democratic-republic-of-the-congo',
+    'EC': 'ecuador',
+    'EG': 'egypt',
+    'SV': 'el-salvador',
+    'GQ': 'equatorial-guinea',
+    'ER': 'eritrea',
+    'EE': 'estonia',
+    'SZ': 'swaziland',
+    'ET': 'ethiopia',
+    'FO': 'faeroe-islands',
+    'FK': 'falkland-islands-malvinas',
+    'FJ': 'fiji',
+    'FI': 'finland',
+    'FR': 'france',
+    'GF': 'french-guiana',
+    'PF': 'french-polynesia',
+    'GA': 'gabon',
+    'GM': 'gambia',
+    'GE': 'georgia',
+    'DE': 'germany',
+    'GH': 'ghana',
+    'GI': 'gibraltar',
+    'GR': 'greece',
+    'GL': 'greenland',
+    'GD': 'grenada',
+    'GP': 'guadeloupe',
+    'GT': 'guatemala',
+    'GN': 'guinea',
+    'GW': 'guinea-bissau',
+    'GY': 'guyana',
+    'HT': 'haiti',
+    'HN': 'honduras',
+    'HK': 'china-hong-kong-sar',
+    'HU': 'hungary',
+    'IS': 'iceland',
+    'IN': 'india',
+    'ID': 'indonesia',
+    'IR': 'iran',
+    'IQ': 'iraq',
+    'IE': 'ireland',
+    'IM': 'isle-of-man',
+    'IL': 'israel',
+    'IT': 'italy',
+    'CI': 'cote-d-ivoire',
+    'JM': 'jamaica',
+    'JP': 'japan',
+    'JO': 'jordan',
+    'KZ': 'kazakhstan',
+    'KE': 'kenya',
+    'KW': 'kuwait',
+    'KG': 'kyrgyzstan',
+    'LA': 'laos',
+    'LV': 'latvia',
+    'LB': 'lebanon',
+    'LS': 'lesotho',
+    'LR': 'liberia',
+    'LY': 'libya',
+    'LI': 'liechtenstein',
+    'LT': 'lithuania',
+    'LU': 'luxembourg',
+    'MO': 'china-macao-sar',
+    'MG': 'madagascar',
+    'MW': 'malawi',
+    'MY': 'malaysia',
+    'MV': 'maldives',
+    'ML': 'mali',
+    'MT': 'malta',
+    'MH': 'marshall-islands',
+    'MQ': 'martinique',
+    'MR': 'mauritania',
+    'MU': 'mauritius',
+    'YT': 'mayotte',
+    'MX': 'mexico',
+    'MD': 'moldova',
+    'MC': 'monaco',
+    'MN': 'mongolia',
+    'ME': 'montenegro',
+    'MS': 'montserrat',
+    'MA': 'morocco',
+    'MZ': 'mozambique',
+    'MM': 'myanmar',
+    'NA': 'namibia',
+    'NP': 'nepal',
+    'NL': 'netherlands',
+    'NC': 'new-caledonia',
+    'NZ': 'new-zealand',
+    'NI': 'nicaragua',
+    'NE': 'niger',
+    'NG': 'nigeria',
+    'MK': 'macedonia',
+    'NO': 'norway',
+    'OM': 'oman',
+    'PK': 'pakistan',
+    'PS': 'state-of-palestine',
+    'PA': 'panama',
+    'PG': 'papua-new-guinea',
+    'PY': 'paraguay',
+    'PE': 'peru',
+    'PH': 'philippines',
+    'PL': 'poland',
+    'PT': 'portugal',
+    'QA': 'qatar',
+    'RO': 'romania',
+    'RU': 'russia',
+    'RE': 'reunion',
+    'RW': 'rwanda',
+    'KR': 'south-korea',
+    'KN': 'saint-kitts-and-nevis',
+    'LC': 'saint-lucia',
+    'MF': 'saint-martin',
+    'PM': 'saint-pierre-and-miquelon',
+    'WS': 'samoa',
+    'SM': 'san-marino',
+    'ST': 'sao-tome-and-principe',
+    'SA': 'saudi-arabia',
+    'SN': 'senegal',
+    'RS': 'serbia',
+    'SC': 'seychelles',
+    'SL': 'sierra-leone',
+    'SG': 'singapore',
+    'SX': 'sint-maarten',
+    'SK': 'slovakia',
+    'SI': 'slovenia',
+    'SB': 'solomon-islands',
+    'SO': 'somalia',
+    'ZA': 'south-africa',
+    'SS': 'south-sudan',
+    'ES': 'spain',
+    'LK': 'sri-lanka',
+    'BL': 'saint-barthelemy',
+    'VC': 'saint-vincent-and-the-grenadines',
+    'SD': 'sudan',
+    'SR': 'suriname',
+    'SE': 'sweden',
+    'CH': 'switzerland',
+    'SY': 'syria',
+    'TW': 'taiwan',
+    'TJ': 'tajikistan',
+    'TZ': 'tanzania',
+    'TH': 'thailand',
+    'TL': 'timor-leste',
+    'TG': 'togo',
+    'TT': 'trinidad-and-tobago',
+    'TN': 'tunisia',
+    'TR': 'turkey',
+    'TC': 'turks-and-caicos-islands',
+    'AE': 'united-arab-emirates',
+    'UG': 'uganda',
+    'UK': 'uk',
+    'UA': 'ukraine',
+    'UY': 'uruguay',
+    'US': 'us',
+    'UZ': 'uzbekistan',
+    'VU': 'vanuatu',
+    'VA': 'holy-see',
+    'VE': 'venezuela',
+    'VN': 'viet-nam',
+    'WF': 'wallis-and-futuna-islands',
+    'EH': 'western-sahara',
+    'YE': 'yemen',
+    'ZM': 'zambia',
+    'ZW': 'zimbabwe'
+}
+
+
+
+
+
+def Cases():
     day_and_time = datetime.now()
+    country = input('Country you want to analyze: ').upper()
     print()
-    print('╔', '═'*30, ' United States ', '═'*30, '╗')
-    usrequest = requests.get('https://www.worldometers.info/coronavirus/country/us/')
-    ussoup = bs4.BeautifulSoup(usrequest.text, 'lxml')
-    uscases = ussoup.select('title')
+    print('╔', ' {} '.format(countries[country].upper()).center(100, '═'), '╗')
+    request = requests.get('https://www.worldometers.info/coronavirus/country/{}/'.format(countries[country]))
+    soup = bs4.BeautifulSoup(request.text, 'lxml')
+    cases = soup.select('title')
 
-    with open('us.txt', 'a+') as file:
-        file.write('{} >>> {}\n\n'.format(day_and_time, uscases[0].getText()))
+    with open('Data/{}.txt'.format(countries[country]), 'a+') as file:
+        file.write('{} >>> {}\n\n'.format(day_and_time, cases[0].getText()))
 
-    print('║', uscases[0].getText(), ' ║')
-    print('╚', '═'*77, '╝', '\n')
+    print('║', cases[0].getText().center(100, ' '), '║')
+    print('╚', '═'*100, '╝', '\n')
 
-def BrCases():
-    day_and_time = datetime.now()
-    print()
-    print('╔', '═'*30, ' Brazil ', '═'*30, '╗')
-    brrequest = requests.get('https://www.worldometers.info/coronavirus/country/brazil/')
-    brsoup = bs4.BeautifulSoup(brrequest.text, 'lxml')
-    brcases = brsoup.select('title')
 
-    with open('br.txt', 'a+') as file:
-        file.write('{} >>> {}\n\n'.format(day_and_time, brcases[0].getText()))
 
-    print('║', brcases[0].getText(), '  ║')
-    print('╚', '═'*70, '╝', '\n')
 
-def PtCases():
-    day_and_time = datetime.now()
-    print()
-    print('╔', '═'*30, ' Portugal ', '═'*30, '╗')
-    ptrequest = requests.get('https://www.worldometers.info/coronavirus/country/portugal/')
-    ptsoup = bs4.BeautifulSoup(ptrequest.text, 'lxml')
-    ptcases = ptsoup.select('title')
-
-    with open('pt.txt', 'a+') as file:
-        file.write('{} >>> {}\n\n'.format(day_and_time, ptcases[0].getText()))
-
-    print('║', ptcases[0].getText(), '      ║')
-    print('╚', '═'*72, '╝', '\n')
 
 while answer.lower() == 'y':
-    UsCases()
-    BrCases()
-    PtCases()
+    Cases()
 
     print('\nLisbon Time >>> {}'.format(datetime.now()))
     print('\n\n\n')
