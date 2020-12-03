@@ -8,11 +8,14 @@
 
 1. Open your cmd by pressing WinKey + R and typing 'cmd'
 
+
 2. In the cmd, enter the following commands, one by one:
-1st command: pip install requests
-2nd command: pip install bs4
-3rd command: pip install lxml
-    
+
+	1st command: pip install requests
+	2nd command: pip install bs4
+	3rd command: pip install lxml
+
+
 3. Now you can start the program.
 
 
@@ -21,10 +24,13 @@
 
 1. Abre o cmd clicando em TeclaWindows + R e escreve 'cmd'
 
+
 2. No cmd, escreve os seguintes comandos, um por um:
-1st command: pip install requests
-2nd command: pip install bs4
-3rd command: pip install lxml
+
+	1st command: pip install requests
+	2nd command: pip install bs4
+	3rd command: pip install lxml
+
 
 3. Agora podes iniciar o programa.
 
