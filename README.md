@@ -12,7 +12,9 @@
 2. In the cmd, enter the following commands, one by one:
 
 	1st command: pip install requests
+
 	2nd command: pip install bs4
+
 	3rd command: pip install lxml
 
 
@@ -27,9 +29,11 @@
 
 2. No cmd, escreve os seguintes comandos, um por um:
 
-	1st command: pip install requests
-	2nd command: pip install bs4
-	3rd command: pip install lxml
+	1° comando: pip install requests
+
+	2° comando: pip install bs4
+
+	3° comando: pip install lxml
 
 
 3. Agora podes iniciar o programa.
