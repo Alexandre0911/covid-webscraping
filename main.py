@@ -6,7 +6,7 @@ from datetime import datetime
 
 
 
-if os.scandir('Data'):
+if os.path.isdir('Data'):
     print('')
 else:
     os.mkdir('Data')
