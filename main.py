@@ -5,14 +5,13 @@ from datetime import datetime
 
 
 
-
 if os.path.isdir('Data'):
     print('')
 else:
     os.mkdir('Data')
 
-answer = 'y'
 
+answer = 'y'
 countries = {'AF': 'afghanistan',
     'AL': 'albania',
     'DZ': 'algeria',
@@ -235,11 +234,9 @@ countries = {'AF': 'afghanistan',
 
 
 
-
-
 def Cases():
     day_and_time = datetime.now()
-    country = input('Country you want to analyze: ').upper()
+    country = input('Country you want to analyze (Check "Countries.png"): ').upper()
     print()
     print('╔', ' {} '.format(countries[country].upper()).center(100, '═'), '╗')
     request = requests.get('https://www.worldometers.info/coronavirus/country/{}/'.format(countries[country]))
@@ -251,8 +248,6 @@ def Cases():
 
     print('║', cases[0].getText().center(100, ' '), '║')
     print('╚', '═'*100, '╝', '\n')
-
-
 
 
 
