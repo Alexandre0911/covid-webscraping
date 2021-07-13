@@ -42,7 +42,7 @@
 
 # ENG DESCRIPTION:
 
-So, this program is really simple it just gets info from a website and prints it into your console.
+So, this program is really simple, it just gets info from a website and prints it into your console.
 It also creates .txt files with the country initials, for example: United States -> us.txt ; Portugal -> pt.txt !
 
 
@@ -50,7 +50,7 @@ I will also be updating the program some times, I want to make it as user friend
 
 
 
-Ass: Alexandre0911
+Alexandre0911
 
 ==========================================================
 
@@ -66,4 +66,4 @@ Vou também atualizar o programa algumas vezes, quero fazê-lo o mais 'user frie
 
 
 
-Ass: Alexandre0911
+Alexandre0911
